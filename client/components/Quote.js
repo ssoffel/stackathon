@@ -18,7 +18,10 @@ class Quote extends Component {
      return<div>_________</div>
    }
    console.log(this.props.stockObj.symbol, '____________')
-    return (<div>Im here</div>)
+    return (
+      <div>Im here</div>
+
+    )
   }
 }
 const mapStateToProps = state => ({

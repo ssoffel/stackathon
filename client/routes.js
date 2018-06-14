@@ -2,13 +2,15 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome} from './components'
+import {Login, Signup} from './components'
+import UserHome from './components/UserHome'
 import Quote from './components/Quote'
 import {me} from './store'
 
 /**
  * COMPONENT
  */
+
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
@@ -20,13 +22,14 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/quotes" component={Quote} />
+           <Route path="/login" component={Login} />
+           <Route path="/signup" component={Signup} />
+          <Route path="/quotes" component={Quote} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+             <Route exact path="/home" component={UserHome} />
+            <Route exact path="/quotes" component={Quote} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

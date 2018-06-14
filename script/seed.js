@@ -2,6 +2,8 @@
 
 const db = require('../server/db')
 const {User} = require('../server/db/models')
+const {StockList} = require('../server/db/models')
+const {Portfolio} = require('../server/db/models')
 
 /**
  * Welcome to the seed file! This seed file uses a newer language feature called...
@@ -20,13 +22,47 @@ async function seed() {
   console.log('db synced!')
   // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
   // executed until that promise resolves!
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+
+  // const users = await Promise.all([
+  //   User.create({email: 'cody@email.com', password: '123'}),
+  //   User.create({email: 'murphy@email.com', password: '123'})
+  // ])
+
+  const cody = await User.create(
+    {email: 'cody@email.com', password: '123'}
+  )
+ const murphy = await User.create(
+    {email: 'murphy@email.com', password: '123'}
+  )
+
+   await Portfolio.create(
+    { symbol: 'UA', sector: 'consumerdurablesapparel', buyPrice: 22.25, shares: 5000, userId: cody.id }
+  )
+     await Portfolio.create(
+    { symbol: 'NKE', sector: 'consumerdurablesapparel', buyPrice: 74.11, shares: 1000, userId: murphy.id }
+  )
+
+  await StockList.create(
+   { symbol: 'NKE' }
+  )
+
+  await StockList.create(
+   { symbol: 'AU' }
+  )
+  await StockList.create(
+   { symbol: 'XOM' }
+  )
+  await StockList.create(
+   { symbol: 'MS' }
+  )
+  await StockList.create(
+   { symbol: 'GS' }
+  )
+
+
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!
-  console.log(`seeded ${users.length} users`)
+  //console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 }
 
@@ -39,7 +75,7 @@ if (module === require.main) {
       console.error(err)
       process.exitCode = 1
     })
-    .finally(() => {
+    .then(() => {
       // `finally` is like then + catch. It runs no matter what.
       console.log('closing db connection')
       db.close()
