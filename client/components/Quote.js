@@ -13,13 +13,10 @@ class Quote extends Component {
 
 
   render() {
-   if(!this.props.stockObj.symbol){
-     console.log("in return")
-     return<div>_________</div>
-   }
-   console.log(this.props.stockObj.symbol, '____________')
+
+   console.log('____________')
     return (
-      <div>Im here</div>
+      <div>Im Quote</div>
 
     )
   }
