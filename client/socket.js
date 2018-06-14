@@ -7,8 +7,8 @@ const socket = io('https://ws-api.iextrading.com/1.0/tops')
 // Listen to the channel's messages
 socket.on('message', message => {
   console.log("message", message)
-
-  store.dispatch(loadStocksThunk(message))
+ var obj = JSON.parse(message)
+  store.dispatch(loadStocksThunk(obj))
    })
 
 

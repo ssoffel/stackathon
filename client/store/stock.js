@@ -1,24 +1,25 @@
 
-const LOAD_STOCK = 'LOAD_STOCK'
+const UAA = 'UAA'
 
 const initialState = {
+
   }
 
-export const loadStock = stockObj => ({
-  type: LOAD_STOCK,
+export const loadStockUAA = stockObj => ({
+  type: UAA,
   stockObj
 })
 
 export const loadStocksThunk = (message) => dispatch => {
-  console.log("in Thunk", message)
-  dispatch(loadStock(message))
+
+  dispatch(loadStockUAA(message))
 }
 
 const stockReducer = (state = initialState, action) => {
 
   console.log("in Reducer", action.stockObj)
   switch (action.type){
-    case LOAD_STOCK: {
+    case UAA: {
     return {
      data: action.stockObj
     }

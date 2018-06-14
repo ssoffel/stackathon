@@ -10,20 +10,23 @@ class UserHome extends Component {
     render(){
 
 
-      console.log("these are my props", this.props.stockObj)
+
 
       if(!this.props.stockObj){
         console.log("UserHome", this.props.stockObj)
         return<div>_________</div>
       }
 
-      var stockObj = this.props.stockObj
+
+      var uaa = this.props.stockObj
+      console.log("These are my props", uaa)
+
 
     return (
       <table className="striped highlight" >
          <thead>
            <tr>
-               <th>Symbol</th>
+               <th>Sym</th>
                <th>Buy</th>
                <th>Bid Size</th>
                <th>Bid</th>
@@ -38,15 +41,15 @@ class UserHome extends Component {
 
          <tbody>
            <tr>
-             <td>{stockObj.symbol}</td>
+             <td>{uaa.symbol}</td>
              <td>Button</td>
-             <td>{stockObj.bidSize}</td>
-             <td>{stockObj.bidPrice}</td>
-             <td>{stockObj.askPrice}</td>
-             <td>{stockObj.askSize}</td>
+             <td>{uaa.bidSize}</td>
+             <td>{uaa.bidPrice}</td>
+             <td>{uaa.askPrice}</td>
+             <td>{uaa.askSize}</td>
              <td>Button</td>
-             <td>{stockObj.lastSalePrice}</td>
-             <td>{stockObj.volume}</td>
+             <td>{uaa.lastSalePrice}</td>
+             <td>{uaa.volume}</td>
            </tr>
            <tr>
              <td>UA</td>
