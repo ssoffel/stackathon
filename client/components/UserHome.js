@@ -7,32 +7,47 @@ import getStockList from '../store/stockList'
 
 class UserHome extends Component {
 
-
+   constructor(){
+     super()
+     this.state = {
+       UaaSize: "",
+       NkeSize: ""
+     }
+   }
 
 
     handleClick = (price, symbol, direction) =>{
+    console.log("event", event.target)
       window.confirm(`
         Symbol: ${symbol},
         direction: ${direction},
         price: ${price},
         status: filled,`
-    );
-      console.log("price", price)
-      console.log("symbol", symbol)
-      console.log("direction", direction)
+     );
+     const buyPrice = price
+     const amount = Number(this.state.UaaSize)
+     const sector = 'Consumer Durables Apparel'
+     const userId = this.props.user
+     const order = { symbol, sector, buyPrice, amount, userId }
+     console.log("order", order)
 
-      console.log("event", event.target)
-    }
+   }
+
+   handleChange = (event) => {
+   console.log("event.target.value", event.target.value)
+   this.setState({ [event.target.name]: event.target.value })
+
+   }
 
     render(){
 
       if(!this.props.stockNKE){
-        console.log("stockObj NKE", this.props)
+
         return<div>_________</div>
       }
 
       if(!this.props.stockUAA){
-        console.log("stockObj UAA", this.props)
+
         return<div>_________</div>
       }
 
@@ -42,8 +57,6 @@ class UserHome extends Component {
       var uaa = this.props.stockUAA
       var nke = this.props.stockNKE
 
-      console.log('this is stockObjUAA', uaa)
-      console.log('this is stockObjNKE', nke)
 
 
 
@@ -72,7 +85,7 @@ class UserHome extends Component {
          <tbody>
             <tr>
              <td id='sym'>{uaa.symbol}</td>
-             <td id='amount'><input type='text'/></td>
+             <td><input onChange={this.handleChange} name='UaaSize'type="text" id='amount'/></td>
              <td className='center-align'>
              <button
                 type='button'onClick={() => this.handleClick(uaa.bidPrice, uaa.symbol, "BUY")}
@@ -91,7 +104,9 @@ class UserHome extends Component {
            </tr>
              <tr>
               <td id='sym'>{nke.symbol}</td>
-              <td id='amount'><input type='text'/></td>
+              <td id='amount'><input id='amount'ref={domNode => {
+              this.domNode = domNode
+            }}type='text'/></td>
               <td className='center-align'><button onClick={() => this.handleClick(nke.bidPrice, nke.symbol, "BUY")} className="btn btn-small waves-effect waves-light" name="buy-button">Buy</button></td>
               <td className="center-align">{nke.bidSize}</td>
               <td id='bid-price' className='center-align'>{nke.bidPrice}</td>
@@ -113,7 +128,7 @@ const mapStateToProps = state => {
   return {
    stockUAA: state.stock.UAA,
    stockNKE: state.stock.NKE,
-   stocks: state.stockList.allStocks
+   user: state.user.id
   }
 }
 

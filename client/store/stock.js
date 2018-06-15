@@ -3,9 +3,11 @@ const UA = 'UA'
 const NK = 'NK'
 
 const initialState = {
-  UAA: {},
-  NKE: {}
-  }
+     UAA: {},
+     NKE: {}
+ }
+
+
 
 export const loadStockUAA = stockObj => ({
   type: UA,
