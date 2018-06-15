@@ -3,7 +3,36 @@ const UAA = 'UAA'
 const NKE = 'NKE'
 
 const initialState = {
-
+     UAA: {
+       symbol: "UA",
+       sector: "consumerdurablesapparel",
+       securityType: "commonstock",
+       bidPrice: 0,
+       bidSize: 0,
+       askPrice: 0,
+       askSize: 0,
+       lastUpdated: 1529061919242,
+       lastSalePrice: 0,
+       lastSaleSize: 0,
+       lastSaleTime: 0,
+       volume: 0,
+       marketPercent: 0,
+     },
+     NKE: {
+       symbol: "NKE",
+       sector: "consumerdurablesapparel",
+       securityType: "commonstock",
+       bidPrice: 0,
+       bidSize: 0,
+       askPrice: 0,
+       askSize: 0,
+       lastUpdated: 1529061919242,
+       lastSalePrice: 0,
+       lastSaleSize: 0,
+       lastSaleTime: 0,
+       volume: 0,
+       marketPercent: 0,
+     }
   }
 
 export const loadStockUAA = stockObj => ({
