@@ -28,14 +28,14 @@ class UserHome extends Component {
          <thead>
            <tr>
                <th id='sym'>Sym</th>
-               <th id='buy-button'>Buy</th>
-               <th id='bid-size'>Bid Size</th>
-               <th id='bid'>Bid</th>
-               <th id='ask'>Ask</th>
-               <th id='askSize'>Ask Size</th>
-               <th id='sell-button'>Sell</th>
-               <th id='last-sale-prcie'>Last Sale Price</th>
-               <th id='volume'>Volume</th>
+               <th className='center-align'>Buy</th>
+               <th className='center-align'>Bid Size</th>
+               <th className='center-align'>Bid</th>
+               <th className='center-align'>Ask</th>
+               <th className='center-align'>Ask Size</th>
+               <th className='center-align'>Sell</th>
+               <th className='right-align'>Last Sale Price</th>
+               <th className='center-align'>Volume</th>
 
            </tr>
          </thead>
@@ -43,13 +43,13 @@ class UserHome extends Component {
          <tbody>
            <tr>
              <td id='sym'>{uaa.symbol}</td>
-             <td id='buy-button'>Button</td>
+             <td className='center-align'><button className="btn btn-small waves-effect waves-light" name="buy-button">Buy</button></td>
              <td className="center-align">{uaa.bidSize}</td>
-             <td className='center-align'>{uaa.bidPrice}</td>
-             <td className='center-align'>{uaa.askPrice}</td>
+             <td id='bid-price' className='center-align'>{uaa.bidPrice}</td>
+             <td id='ask-price' className='center-align'>{uaa.askPrice}</td>
              <td className='center-align'>{uaa.askSize}</td>
-             <td id='sell-button'>Button</td>
-             <td className='center-align'>{uaa.lastSalePrice}</td>
+             <td className='center-align'><button className="btn btn-small waves-effect waves-light" name="sell-button">Sell</button></td>
+             <td className='right-align'>{uaa.lastSalePrice}</td>
              <td className='center-align'>{uaa.volume}</td>
            </tr>
 

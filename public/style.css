@@ -2,7 +2,21 @@ table.striped>tbody>tr:nth-child(odd) {
     background-color: rgba(202, 178, 178, 0.34);
 }
 
- 
+td#bid-price.center-align {
+  font-size: 1.5em;
+
+}
+
+td#ask-price.center-align {
+  font-size: 1.5em;
+}
+
+button.btn.btn-small.waves-effect.waves-light{
+  background-color: #19504b;
+  color: #if0303;
+}
+
+
 
 body {
   font-family: sans-serif;
