@@ -1,6 +1,7 @@
 import React, { Component} from 'react'
 import { connect } from 'react-redux'
 import getStockList from '../store/stockList'
+import { postOrder } from '../store/orders'
 
 
 
@@ -29,7 +30,8 @@ class UserHome extends Component {
      const sector = 'Consumer Durables Apparel'
      const userId = this.props.user
      const order = { symbol, sector, buyPrice, amount, userId }
-     console.log("order", order)
+     this.props.postOrder(order)
+
 
    }
 
@@ -134,7 +136,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
 
-  getStockList: () => dispatch(getStockList())
+  getStockList: () => dispatch(getStockList()),
+  postOrder: (order) => dispatch(postOrder(order))
 
 
 })
