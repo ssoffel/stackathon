@@ -1,5 +1,6 @@
 
 const UAA = 'UAA'
+const NKE = 'NKE'
 
 const initialState = {
 
@@ -10,10 +11,16 @@ export const loadStockUAA = stockObj => ({
   stockObj
 })
 
+
 export const loadStocksThunk = (message) => dispatch => {
 
-  dispatch(loadStockUAA(message))
-}
+     dispatch(loadStockUAA(message))
+
+
+  }
+
+
+
 
 const stockReducer = (state = initialState, action) => {
 
@@ -21,7 +28,12 @@ const stockReducer = (state = initialState, action) => {
   switch (action.type){
     case UAA: {
     return {
-     data: action.stockObj
+     UAA: action.stockObj
+    }
+  }
+    case NKE: {
+    return {
+      NKE: action.stockObj
     }
   }
   default:

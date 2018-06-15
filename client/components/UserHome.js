@@ -12,14 +12,17 @@ class UserHome extends Component {
 
 
 
-      if(!this.props.stockObj){
-        console.log("UserHome", this.props.stockObj)
+      if(!this.props.stockUAA){
+        console.log("UserHome", this.props.stockUAA)
         return<div>_________</div>
       }
 
 
-      var uaa = this.props.stockObj
-      console.log("These are my props", uaa)
+
+      var uaa = this.props.stockUAA
+
+      console.log("These are my props uaa", uaa)
+
 
 
     return (
@@ -41,7 +44,7 @@ class UserHome extends Component {
          </thead>
 
          <tbody>
-           <tr>
+            <tr>
              <td id='sym'>{uaa.symbol}</td>
              <td className='center-align'><button className="btn btn-small waves-effect waves-light" name="buy-button">Buy</button></td>
              <td className="center-align">{uaa.bidSize}</td>
@@ -54,6 +57,17 @@ class UserHome extends Component {
            </tr>
 
 
+              <tr>
+               <td id='sym'>{uaa.symbol}</td>
+               <td className='center-align'><button className="btn btn-small waves-effect waves-light" name="buy-button">Buy</button></td>
+               <td className="center-align">{uaa.bidSize}</td>
+               <td id='bid-price' className='center-align'>{uaa.bidPrice}</td>
+               <td id='ask-price' className='center-align'>{uaa.askPrice}</td>
+               <td className='center-align'>{uaa.askSize}</td>
+               <td className='center-align'><button className="btn btn-small waves-effect waves-light" name="sell-button">Sell</button></td>
+               <td className='right-align'>{uaa.lastSalePrice}</td>
+               <td className='center-align'>{uaa.volume}</td>
+             </tr>
          </tbody>
        </table>
        </div>
@@ -64,7 +78,8 @@ class UserHome extends Component {
 
 const mapStateToProps = state => {
   return {
-   stockObj: state.stock.data,
+   stockUAA: state.stock.UAA,
+  // stockNKE: state.stock.NKE,
    stocks: state.stockList.allStocks
   }
 }
