@@ -23,48 +23,40 @@ class UserHome extends Component {
 
 
     return (
+    <div className='row container'>
       <table className="striped highlight" >
          <thead>
            <tr>
-               <th>Sym</th>
-               <th>Buy</th>
-               <th>Bid Size</th>
-               <th>Bid</th>
-               <th>Ask</th>
-               <th>Ask Size</th>
-               <th>Sell</th>
-               <th>Last Sale Price</th>
-               <th>Volume</th>
+               <th id='sym'>Sym</th>
+               <th id='buy-button'>Buy</th>
+               <th id='bid-size'>Bid Size</th>
+               <th id='bid'>Bid</th>
+               <th id='ask'>Ask</th>
+               <th id='askSize'>Ask Size</th>
+               <th id='sell-button'>Sell</th>
+               <th id='last-sale-prcie'>Last Sale Price</th>
+               <th id='volume'>Volume</th>
 
            </tr>
          </thead>
 
          <tbody>
            <tr>
-             <td>{uaa.symbol}</td>
-             <td>Button</td>
-             <td>{uaa.bidSize}</td>
-             <td>{uaa.bidPrice}</td>
-             <td>{uaa.askPrice}</td>
-             <td>{uaa.askSize}</td>
-             <td>Button</td>
-             <td>{uaa.lastSalePrice}</td>
-             <td>{uaa.volume}</td>
+             <td id='sym'>{uaa.symbol}</td>
+             <td id='buy-button'>Button</td>
+             <td className="center-align">{uaa.bidSize}</td>
+             <td className='center-align'>{uaa.bidPrice}</td>
+             <td className='center-align'>{uaa.askPrice}</td>
+             <td className='center-align'>{uaa.askSize}</td>
+             <td id='sell-button'>Button</td>
+             <td className='center-align'>{uaa.lastSalePrice}</td>
+             <td className='center-align'>{uaa.volume}</td>
            </tr>
-           <tr>
-             <td>UA</td>
-             <td>Button</td>
-             <td>1000</td>
-             <td>22.11</td>
-             <td>22.15</td>
-             <td>1500</td>
-             <td>Button</td>
-             <td>22.13</td>
-             <td>1,250,000</td>
-           </tr>
+
 
          </tbody>
        </table>
+       </div>
           )
       }
     }

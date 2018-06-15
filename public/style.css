@@ -2,6 +2,8 @@ table.striped>tbody>tr:nth-child(odd) {
     background-color: rgba(202, 178, 178, 0.34);
 }
 
+ 
+
 body {
   font-family: sans-serif;
 }
