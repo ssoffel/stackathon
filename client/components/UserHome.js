@@ -7,10 +7,16 @@ import getStockList from '../store/stockList'
 
 class UserHome extends Component {
 
+
+    handleClick = (price, symbol, direction) =>{
+      console.log("price", price)
+      console.log("symbol", symbol)
+      console.log("direction", direction)
+
+      console.log("event", event.target)
+    }
+
     render(){
-
-
-
 
       if(!this.props.stockObjs){
         console.log("UserHome", this.props.stockObjs)
@@ -50,23 +56,24 @@ class UserHome extends Component {
          <tbody>
             <tr>
              <td id='sym'>{uaa.symbol}</td>
-             <td className='center-align'><button className="btn btn-small waves-effect waves-light" name="buy-button">Buy</button></td>
+             <td className='center-align'>
+             <button type='button'onClick={() => this.handleClick(uaa.bidPrice, uaa.symbol, "BUY")} className="btn btn-small waves-effect waves-light" name="buy-button">Buy</button></td>
              <td className="center-align">{uaa.bidSize}</td>
              <td id='bid-price' className='center-align'>{uaa.bidPrice}</td>
              <td id='ask-price' className='center-align'>{uaa.askPrice}</td>
              <td className='center-align'>{uaa.askSize}</td>
-             <td className='center-align'><button className="btn btn-small waves-effect waves-light" name="sell-button">Sell</button></td>
+             <td className='center-align'><button onClick={() => this.handleClick(uaa.askPrice, uaa.symbol, "SEll")} className="btn btn-small waves-effect waves-light" name="sell-button">Sell</button></td>
              <td className='right-align'>{uaa.lastSalePrice}</td>
              <td className='center-align'>{uaa.volume}</td>
            </tr>
              <tr>
               <td id='sym'>{nke.symbol}</td>
-              <td className='center-align'><button className="btn btn-small waves-effect waves-light" name="buy-button">Buy</button></td>
+              <td className='center-align'><button onClick={() => this.handleClick(nke.bidPrice, nke.symbol, "BUY")} className="btn btn-small waves-effect waves-light" name="buy-button">Buy</button></td>
               <td className="center-align">{nke.bidSize}</td>
               <td id='bid-price' className='center-align'>{nke.bidPrice}</td>
               <td id='ask-price' className='center-align'>{nke.askPrice}</td>
               <td className='center-align'>{nke.askSize}</td>
-              <td className='center-align'><button className="btn btn-small waves-effect waves-light" name="sell-button">Sell</button></td>
+              <td className='center-align'><button onClick={() => this.handleClick(nke.bidPrice, nke.symbol, "SELL")} className="btn btn-small waves-effect waves-light" name="sell-button">Sell</button></td>
               <td className='right-align'>{nke.lastSalePrice}</td>
               <td className='center-align'>{nke.volume}</td>
             </tr>
