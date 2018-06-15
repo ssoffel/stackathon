@@ -1,70 +1,52 @@
 
-const UAA = 'UAA'
-const NKE = 'NKE'
+const UA = 'UA'
+const NK = 'NK'
 
 const initialState = {
-     UAA: {
-       symbol: "UA",
-       sector: "consumerdurablesapparel",
-       securityType: "commonstock",
-       bidPrice: 0,
-       bidSize: 0,
-       askPrice: 0,
-       askSize: 0,
-       lastUpdated: 1529061919242,
-       lastSalePrice: 0,
-       lastSaleSize: 0,
-       lastSaleTime: 0,
-       volume: 0,
-       marketPercent: 0,
-     },
-     NKE: {
-       symbol: "NKE",
-       sector: "consumerdurablesapparel",
-       securityType: "commonstock",
-       bidPrice: 0,
-       bidSize: 0,
-       askPrice: 0,
-       askSize: 0,
-       lastUpdated: 1529061919242,
-       lastSalePrice: 0,
-       lastSaleSize: 0,
-       lastSaleTime: 0,
-       volume: 0,
-       marketPercent: 0,
-     }
+  UAA: {},
+  NKE: {}
   }
 
 export const loadStockUAA = stockObj => ({
-  type: UAA,
+  type: UA,
+  stockObj
+})
+
+export const loadStockNKE = stockObj => ({
+  type: NK,
   stockObj
 })
 
 
 export const loadStocksThunk = (message) => dispatch => {
-
-     dispatch(loadStockUAA(message))
-
-
+  if(message.symbol === "UAA"){
+    console.log("AA Message", message)
+    dispatch(loadStockUAA(message))
+  } else {
+    console.log("NK Message", message)
+    dispatch(loadStockNKE(message))
   }
 
-
-
+}
 
 const stockReducer = (state = initialState, action) => {
 
-  console.log("in Reducer", action.stockObj)
+
   switch (action.type){
-    case UAA: {
-    return {
-     UAA: action.stockObj
-    }
+    case UA: {
+
+    return Object.assign({}, state, {
+        UAA: action.stockObj
+      }
+    )
   }
-    case NKE: {
-    return {
-      NKE: action.stockObj
+    case NK: {
+      return Object.assign({}, state, {
+          NKE: action.stockObj
+        }
+      )
     }
-  }
+
   default:
   return state
  }

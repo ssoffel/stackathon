@@ -9,6 +9,7 @@ class UserHome extends Component {
 
 
     handleClick = (price, symbol, direction) =>{
+
       console.log("price", price)
       console.log("symbol", symbol)
       console.log("direction", direction)
@@ -18,18 +19,25 @@ class UserHome extends Component {
 
     render(){
 
-      if(!this.props.stockObjs){
-        console.log("UserHome", this.props.stockObjs)
+      if(!this.props.stockNKE){
+        console.log("stockObj NKE", this.props)
+        return<div>_________</div>
+      }
+
+      if(!this.props.stockUAA){
+        console.log("stockObj UAA", this.props)
         return<div>_________</div>
       }
 
 
 
-      var uaa = this.props.stockObjs.UAA
-      var nke = this.props.stockObjs.NKE
 
-      console.log('this is uaa', uaa)
-      console.log('this is nke', nke)
+      var uaa = this.props.stockUAA
+      var nke = this.props.stockNKE
+
+      console.log('this is stockObjUAA', uaa)
+      console.log('this is stockObjNKE', nke)
+
 
 
 
@@ -87,8 +95,8 @@ class UserHome extends Component {
 
 const mapStateToProps = state => {
   return {
-   stockObjs: state.stock,
-  // stockNKE: state.stock.NKE,
+   stockUAA: state.stock.UAA,
+   stockNKE: state.stock.NKE,
    stocks: state.stockList.allStocks
   }
 }
