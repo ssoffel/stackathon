@@ -8,8 +8,15 @@ import getStockList from '../store/stockList'
 class UserHome extends Component {
 
 
-    handleClick = (price, symbol, direction) =>{
 
+
+    handleClick = (price, symbol, direction) =>{
+      window.confirm(`
+        Symbol: ${symbol},
+        direction: ${direction},
+        price: ${price},
+        status: filled,`
+    );
       console.log("price", price)
       console.log("symbol", symbol)
       console.log("direction", direction)
@@ -45,10 +52,11 @@ class UserHome extends Component {
 
     return (
     <div className='row container'>
-      <table className="striped highlight" >
+      <table className="striped" >
          <thead>
            <tr>
                <th id='sym'>Sym</th>
+               <th className="center-align">Amount</th>
                <th className='center-align'>Buy</th>
                <th className='center-align'>Bid Size</th>
                <th className='center-align'>Bid</th>
@@ -64,18 +72,26 @@ class UserHome extends Component {
          <tbody>
             <tr>
              <td id='sym'>{uaa.symbol}</td>
+             <td id='amount'><input type='text'/></td>
              <td className='center-align'>
-             <button type='button'onClick={() => this.handleClick(uaa.bidPrice, uaa.symbol, "BUY")} className="btn btn-small waves-effect waves-light" name="buy-button">Buy</button></td>
+             <button
+                type='button'onClick={() => this.handleClick(uaa.bidPrice, uaa.symbol, "BUY")}
+                className="btn btn-small waves-effect waves-light"
+                 name="buy-button">Buy</button></td>
+
+
+
              <td className="center-align">{uaa.bidSize}</td>
              <td id='bid-price' className='center-align'>{uaa.bidPrice}</td>
              <td id='ask-price' className='center-align'>{uaa.askPrice}</td>
              <td className='center-align'>{uaa.askSize}</td>
-             <td className='center-align'><button onClick={() => this.handleClick(uaa.askPrice, uaa.symbol, "SEll")} className="btn btn-small waves-effect waves-light" name="sell-button">Sell</button></td>
+             <td className='center-align'><button data-target="modal1" onClick={() => this.handleClick(uaa.askPrice, uaa.symbol, "SEll")} className="btn btn-small waves-effect waves-light" name="sell-button">Sell</button></td>
              <td className='right-align'>{uaa.lastSalePrice}</td>
              <td className='center-align'>{uaa.volume}</td>
            </tr>
              <tr>
               <td id='sym'>{nke.symbol}</td>
+              <td id='amount'><input type='text'/></td>
               <td className='center-align'><button onClick={() => this.handleClick(nke.bidPrice, nke.symbol, "BUY")} className="btn btn-small waves-effect waves-light" name="buy-button">Buy</button></td>
               <td className="center-align">{nke.bidSize}</td>
               <td id='bid-price' className='center-align'>{nke.bidPrice}</td>
