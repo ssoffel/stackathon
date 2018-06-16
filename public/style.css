@@ -11,6 +11,18 @@ td#ask-price.center-align {
   font-size: 1.5em;
 }
 
+input#amount {
+  text-align: center;
+
+
+}
+td#tdAmount {
+  width: 120px;
+}
+th#tdAmount {
+    width: 120px;
+}
+
 button.btn.btn-small.waves-effect.waves-light{
   background-color: #19504b;
   color: #if0303;

@@ -16,7 +16,6 @@ export const gotOrder = order => ({
 export const postOrder = (order) =>  {
   return async dispatch => {
     try {
-    console.log("this is order", order)
     const response = await axios.post(`/api/portfolio`, order)
     const newOrder = response.data;
     dispatch(gotOrder(newOrder))
