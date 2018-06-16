@@ -16,7 +16,7 @@ socket.on('connect', () => {
   console.log('Connected!')
 
   // Subscribe to topics (i.e. appl,fb,aig+)
-  socket.emit('subscribe', 'uaa,nke')
+  socket.emit('subscribe', 'uaa,nke,gs,ms,xom,twtr,tsla')
 })
 
 
