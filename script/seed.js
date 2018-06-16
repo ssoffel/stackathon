@@ -36,10 +36,10 @@ async function seed() {
   )
 
    await Portfolio.create(
-    { symbol: 'UA', sector: 'consumerdurablesapparel', buyPrice: 22.25, shares: 5000, userId: cody.id }
+    { symbol: 'UAA', sector: 'Consumer Durables Apparel', buyPrice: 22.25, amount: 5000, userId: cody.id }
   )
      await Portfolio.create(
-    { symbol: 'NKE', sector: 'consumerdurablesapparel', buyPrice: 74.11, shares: 1000, userId: murphy.id }
+    { symbol: 'NKE', sector: 'Consumer Durables Apparel', buyPrice: 74.11, amount: 1000, userId: murphy.id }
   )
 
   await StockList.create(
@@ -47,7 +47,7 @@ async function seed() {
   )
 
   await StockList.create(
-   { symbol: 'AU' }
+   { symbol: 'UAA' }
   )
   await StockList.create(
    { symbol: 'XOM' }

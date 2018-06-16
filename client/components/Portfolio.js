@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 
-class Quote extends Component {
+class Portfolio extends Component {
 
 
   componentDidMount() {
@@ -30,4 +30,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   null
-)(Quote)
+)(Portfolio)

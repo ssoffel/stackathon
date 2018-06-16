@@ -23,6 +23,31 @@ th#tdAmount {
     width: 120px;
 }
 
+#headerDiv {
+  height: 30px;
+}
+
+table#header.striped {
+  margin-top: 2.5em;
+  border-radius: 25px !important;
+}
+
+thead#ordersHead {
+  border: 1px solid black;
+  border-radius: 25px !important;
+
+
+
+}
+tbody#ordersBody {
+  border: 1px solid black;
+  border-radius: 25px !important;
+
+
+
+}
+
+
 button.btn.btn-small.waves-effect.waves-light{
   background-color: #19504b;
   color: #if0303;

@@ -13,14 +13,15 @@ const Portfolio = db.define('portfolio', {
   },
   buyPrice: {
     type: Sequelize.DECIMAL(10, 4),
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-      min: 0,
-    },
+    defaultValue: 0,
   },
   sellPrice: {
-    type: Sequelize.DECIMAL(10, 4)
+    type: Sequelize.DECIMAL(10, 4),
+    defaultValue: 0,
+  },
+  amount: {
+    type: Sequelize.INTEGER,
+    allowNull: false
   },
 })
 

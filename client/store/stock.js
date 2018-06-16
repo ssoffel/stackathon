@@ -58,42 +58,35 @@ export const loadStockTSLA = stockObj => ({
 export const loadStocksThunk = (message) => dispatch => {
   switch(message.symbol){
     case 'UAA':
-      console.log("UAA Message", message)
+
       dispatch(loadStockUAA(message))
       break
     case 'NKE':
-      console.log("NKE Message", message)
+
       dispatch(loadStockNKE(message))
       break
     case 'GS':
-      console.log("GS Message", message)
+
       dispatch(loadStockGS(message))
       break
     case 'MS':
-      console.log("MS Message", message)
+
       dispatch(loadStockMS(message))
       break
     case 'XOM':
-      console.log("XOM Message", message)
+
       dispatch(loadStockXOM(message))
       break
     case 'TWTR':
-        console.log("TWTR Message", message)
+
         dispatch(loadStockTWTR(message))
         break
     case 'TSLA':
-        console.log("TSLA Message", message)
+
         dispatch(loadStockTSLA(message))
         break
     default:
     }
-  // if(message.symbol === "UAA"){
-  //   console.log("AA Message", message)
-  //   dispatch(loadStockUAA(message))
-  // } else {
-  //   console.log("NK Message", message)
-  //   dispatch(loadStockNKE(message))
-  // }
 
 }
 
