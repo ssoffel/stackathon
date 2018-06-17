@@ -40,11 +40,11 @@ class UserHome extends Component {
       switch (symbol) {
             case 'UAA':
               amount = this.state.UAA
-              sector = "Comsumer Durable Apparel"
+              sector = "Consumer Durable Apparel"
               break
             case "NKE":
                amount = this.state.NKE
-               sector = "Comsumer Durable Apparel"
+               sector = "Consumer Durable Apparel"
               break
             case "GS":
                amount = this.state.GS

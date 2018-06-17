@@ -14,7 +14,7 @@ class Portfolio extends Component {
       GS: "",
       MS: "",
       XOM: "",
-      TWRT: "",
+      TWTR: "",
       TSLA: ""
     }
   }
@@ -29,8 +29,8 @@ class Portfolio extends Component {
       GS: this.props.stockGS,
       MS: this.props.stockMS,
       XOM: this.props.stockXOM,
-      TWRT: this.props.stockTWTR,
-      TSLA: this.props.stockTWTR,
+      TWTR: this.props.stockTWTR,
+      TSLA: this.props.stockTSLA,
 
     })
   }
@@ -42,8 +42,15 @@ class Portfolio extends Component {
     //   return<div>Loading...</div>
     // }
 
+    if(!this.state.UAA || !this.state.NKE || !this.state.GS || !this.state.MS || !this.state.XOM
+       || !this.state.TWTR || !this.state.TSLA){
 
+      return<div>Loading...</div>
+    }
 
+    console.log("this.is UAA state", this.state.UAA)
+    console.log("this.is NKE state", this.state.NKE)
+    console.log("this.is GS state", this.state.GS)
 
 
 
@@ -52,12 +59,58 @@ class Portfolio extends Component {
 
         {
           this.props.aggregateOrders.map((order, index) => {
+            var stateObj;
+            var key = Object.keys(order)
+            console.log("this is order", key[0])
+            switch (key[0]) {
+              case 'UAA':
+                stateObj = this.state.UAA
+                stateObj.sector = 'Consumer Durable Goods'
+                console.log("in UAA", stateObj)
+                break
+              case "NKE":
+                 stateObj = this.state.NKE
+                 stateObj.sector = 'Consumer Durable Goods'
+                 console.log("in NKE", stateObj)
+                 break
+              case "GS":
+                 stateObj = this.state.GS
+                 stateObj.sector = 'Banking'
+                 console.log("in GS", stateObj)
+                 break
+              case "MS":
+                 stateObj = this.state.MS
+                 stateObj.sector = 'Banking'
+                 console.log("in MS", stateObj)
+                 break
+              case "XOM":
+                 stateObj = this.state.XOM
+                 stateObj.sector = 'Energy'
+                 console.log("in XOM", stateObj)
+                 break
+              case "TWTR":
+                 stateObj = this.state.TWTR
+                 stateObj.sector = 'Software Services'
+                 console.log("in TWTR", stateObj)
+                 break
+              case "TSLA":
+                 stateObj = this.state.TSLA
+                 stateObj.sector = 'Automotive'
+                 console.log("in TSLA", stateObj)
+                 break
+             default:
+                stateObj = "default"
+                console.log("in default", stateObj)
+
+              }//switch
+
            return (
             <li key={index} className="collection-item avatar">
               <i className="material-icons circle red">{Object.keys(order)}</i>
               <span className="title">Shares: {order[Object.keys(order)]}</span>
-              <p>Current Value: {}<br/>
-                Second Line
+
+              <p>Sector: {stateObj.sector} <br/>
+                 Current Value: { Number(order[Object.keys(order)]) * Number(stateObj.bidPrice) } <br/>
               </p>
               <a href="#!" className="secondary-content"><i className="material-icons">grade</i></a>
             </li>
