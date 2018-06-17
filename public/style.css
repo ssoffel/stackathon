@@ -35,6 +35,8 @@ table#header.striped {
 thead#ordersHead {
   border: 1px solid black;
   border-radius: 25px !important;
+  background-color: rgba(66, 57, 57, 0.6);
+  font-size: 20px;
 
 
 

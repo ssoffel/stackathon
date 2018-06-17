@@ -2,9 +2,11 @@ import axios from 'axios'
 
 const GOT_ORDER = 'GOT_ORDER'
 const GOT_ALL_ORDERS = 'GOT_ALL_ORDERS'
+const AGGREGATE_ORDERS = 'AGGREGATE_ORDERS'
 
  const initialState = {
-     allOrders: []
+     allOrders: [],
+     aggregateOrders: []
  }
 
 
@@ -18,6 +20,11 @@ export const gotAllOrders = orders => ({
   orders
 })
 
+export const aggregateOrders = orders => ({
+  type: AGGREGATE_ORDERS,
+  orders
+})
+
 
 export const getAllOrders = () => {
   return async dispatch => {
@@ -28,6 +35,19 @@ export const getAllOrders = () => {
     } catch (error) { console(error) }
   }
 }
+
+export const getAllAggregatedOrders = () => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`/api/portfolio`)
+      const orders = response.data
+      dispatch(aggregateOrders(orders))
+    } catch (error) { console(error) }
+  }
+}
+
+
+
 
 
 export const postOrder = (order) =>  {
@@ -58,7 +78,26 @@ const orderReducer = (state = initialState, action) => {
       ...state,
       allOrders: action.orders
     }
-}
+ }
+ case AGGREGATE_ORDERS:{
+   var stocks = {};
+   action.orders.forEach(order => {
+     if(stocks[order.symbol]){
+       var shares = order.amount
+       stocks[order.symbol] += shares
+     } else {
+       stocks[order.symbol] = order.amount
+     }
+ })
+ var ordersAggregator = []
+  Object.keys(stocks).forEach(function(key){
+     ordersAggregator.push({[key]: stocks[key]})
+  })
+   return {
+     ...state,
+     aggregateOrders: ordersAggregator
+   }
+ }
   default:
   return state
  }

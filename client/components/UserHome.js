@@ -6,6 +6,7 @@ import { postOrder } from '../store/orders'
 
 
 
+
 class UserHome extends Component {
 
    constructor(){
@@ -21,6 +22,8 @@ class UserHome extends Component {
 
      }
    }
+
+
 
 
     handleClick = (price, symbol, direction) =>{
@@ -187,6 +190,8 @@ const mapDispatchToProps = dispatch => ({
 
   getStockList: () => dispatch(getStockList()),
   postOrder: (order) => dispatch(postOrder(order))
+
+
 
 
 })
