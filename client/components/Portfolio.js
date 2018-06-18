@@ -111,9 +111,10 @@ class Portfolio extends Component {
 
               <p>Sector: {stateObj.sector} <br/>
                  Current Value: { Math.abs(Number(order[Object.keys(order)]) * Number(stateObj.bidPrice)) } <br/>
-                 Daily Profit/Loss: { '$500' } <br/>
+                 Daily P&L: { '$500' } <br/>
+                 Net P&L: { '$25,000' } <br/>
               </p>
-              <a href="#!" className="secondary-content"><i className="material-icons">grade</i></a>
+
             </li>
           )
          })}

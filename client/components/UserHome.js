@@ -19,13 +19,13 @@ class UserHome extends Component {
        XOM: "",
        TWTR: "",
        TSLA: "",
-       UAA_daily: {amount: 0, costOfShares: 0, avgPrice: 0, dailyClosedPL: 0 },
-       NKE_daily: {amount: 0, costOfShares: 0, avgPrice: 0, dailyClosedPL: 0 },
-       GS_daily: {amount: 0, costOfShares: 0, avgPrice: 0, dailyClosedPL: 0 },
-       MS_daily: {amount: 0, costOfShares: 0, avgPrice: 0, dailyClosedPL: 0 },
-       XOM_daily: {amount: 0, costOfShares: 0, avgPrice: 0, dailyClosedPL: 0 },
-       TWTR_daily: {amount: 0, costOfShares: 0, avgPrice: 0, dailyClosedPL: 0 },
-       TSLA_daily: {amount: 0, costOfShares: 0, avgPrice: 0, dailyClosedPL: 0 },
+       UAA_daily: {amount: 0, costOfShares: 0, avgPrice: 0 },
+       NKE_daily: {amount: 0, costOfShares: 0, avgPrice: 0 },
+       GS_daily: {amount: 0, costOfShares: 0, avgPrice: 0 },
+       MS_daily: {amount: 0, costOfShares: 0, avgPrice: 0 },
+       XOM_daily: {amount: 0, costOfShares: 0, avgPrice: 0 },
+       TWTR_daily: {amount: 0, costOfShares: 0, avgPrice: 0 },
+       TSLA_daily: {amount: 0, costOfShares: 0, avgPrice: 0 },
 
      }
    }
@@ -48,8 +48,7 @@ class UserHome extends Component {
               sector = 'Consumer Durable Apparel'
               state = {...this.state.UAA_daily};
 
-              // state.dailyClosedPL = state.amount == 0 ? state.dailyClosedPL :
-              // Number(this.state.UAA.amount * price) - Number(this.state.UAA.amount * state.avgPrice)
+
 
               state.amount = this.state.UAA_daily.amount + Number(amount);
               state.costOfShares = Number(this.state.UAA_daily.costOfShares) + Number(amount * price)
@@ -187,6 +186,8 @@ class UserHome extends Component {
       this.state.TWTR_daily,
       this.state.TSLA_daily]
 
+
+
     return (
     <div className='row container'>
       <table className="striped highlighted" >
@@ -211,6 +212,7 @@ class UserHome extends Component {
          <tbody>
          {
             storeArray.map((stock, index) =>  {
+
               return (
             <tr key={index}>
              <td id='sym'>{stock.symbol}</td>
@@ -234,7 +236,11 @@ class UserHome extends Component {
                  className="btn btn-small waves-effect waves-light"
                  name="sell-button">Sell</button></td>
              <td className='center-align'>{stockAmount[index].amount}</td>
-             <td className='center-align'>{Math.round((stockAmount[index].amount * stock.lastSalePrice) - (stockAmount[index].amount * stockAmount[index].avgPrice)) }</td>
+
+
+             <td className='center-align'>{ !isNaN(Math.round((stockAmount[index].amount * stock.lastSalePrice) - (stockAmount[index].amount * stockAmount[index].avgPrice))) ?
+             Math.round((stockAmount[index].amount * stock.lastSalePrice) - (stockAmount[index].amount * stockAmount[index].avgPrice)) :
+              ((stockAmount[index].costOfShares) * -1) }</td>
              <td className='center-align'>{stock.lastSalePrice}</td>
              <td className='center-align'>{stock.volume}</td>
 
