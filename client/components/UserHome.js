@@ -17,8 +17,15 @@ class UserHome extends Component {
        GS: "",
        MS: "",
        XOM: "",
-       TWRT: "",
+       TWTR: "",
        TSLA: "",
+       UAA_daily: {amount: 0, costOfShares: 0, avgPrice: 0},
+       NKE_daily: {amount: 0, costOfShares: 0, avgPrice: 0},
+       GS_daily: {amount: 0, costOfShares: 0, avgPrice: 0},
+       MS_daily: {amount: 0, costOfShares: 0, avgPrice: 0},
+       XOM_daily: {amount: 0, costOfShares: 0, avgPrice: 0},
+       TWTR_daily: {amount: 0, costOfShares: 0, avgPrice: 0},
+       TSLA_daily: {amount: 0, costOfShares: 0, avgPrice: 0},
 
      }
    }
@@ -37,34 +44,74 @@ class UserHome extends Component {
      var amount;
      var order;
      var sector;
+     var state;
       switch (symbol) {
             case 'UAA':
-              amount = this.state.UAA
-              sector = "Consumer Durable Apparel"
+              amount = direction === 'BUY' ? this.state.UAA : (this.state.UAA * -1)
+              sector = 'Consumer Durable Apparel'
+              state = {...this.state.UAA_daily};
+              state.amount = this.state.UAA_daily.amount + Number(amount);
+              state.costOfShares = Number(this.state.UAA_daily.costOfShares) + Number(amount * price)
+              state.avgPrice = state.costOfShares / state.amount
+
               break
             case "NKE":
-               amount = this.state.NKE
-               sector = "Consumer Durable Apparel"
+              amount = direction === 'BUY' ? this.state.NKE : (this.state.NKE * -1)
+              sector = 'Consumer Durable Apparel'
+              state = {...this.state.NKE_daily};
+              state.amount = this.state.NKE_daily.amount + Number(amount);
+              state.costOfShares = Number(this.state.NKE_daily.costOfShares) + Number(amount * price)
+              state.avgPrice = state.costOfShares / state.amount
+
+
               break
             case "GS":
-               amount = this.state.GS
-               sector = "Banking"
+            amount = direction === 'BUY' ? this.state.GS : (this.state.GS * -1)
+            sector = "Banking"
+            state = {...this.state.GS_daily};
+            state.amount = this.state.GS_daily.amount + Number(amount);
+            state.costOfShares = Number(this.state.GS_daily.costOfShares) + Number(amount * price)
+            state.avgPrice = state.costOfShares / state.amount
+
                break
             case "MS":
-               amount = this.state.MS
-               sector = "Banking"
+            amount = direction === 'BUY' ? this.state.MS : (this.state.MS * -1)
+            sector = "Banking"
+            state = {...this.state.MS_daily};
+            state.amount = this.state.MS_daily.amount + Number(amount);
+            state.costOfShares = Number(this.state.MS_daily.costOfShares) + Number(amount * price)
+            state.avgPrice = state.costOfShares / state.amount
+
+
                break
             case "XOM":
-               amount = this.state.XOM
-               sector = "Energy"
+            amount = direction === 'BUY' ? this.state.XOM : (this.state.XOM * -1)
+            sector = "Energy"
+            state = {...this.state.XOM_daily};
+            state.amount = this.state.XOM_daily.amount + Number(amount);
+            state.costOfShares = Number(this.state.XOM_daily.costOfShares) + Number(amount * price)
+            state.avgPrice = state.costOfShares / state.amount
+
                break
             case "TWTR":
-               amount = this.state.TWTR
-               sector = "Software Services"
+            amount = direction === 'BUY' ? this.state.TWTR : (this.state.TWTR * -1)
+            sector = 'Software Services'
+            state = {...this.state.TWTR_daily};
+            state.amount = this.state.TWTR_daily.amount + Number(amount);
+            state.costOfShares = Number(this.state.TWTR_daily.costOfShares) + Number(amount * price)
+            state.avgPrice = state.costOfShares / state.amount
+
+
                break
             case "TSLA":
-               amount = this.state.TSLA
-               sector = "Automotive"
+            amount = direction === 'BUY' ? this.state.TSLA : (this.state.TSLA * -1)
+            sector = 'Automotive'
+            state = {...this.state.TSLA_daily};
+            state.amount = this.state.TSLA_daily.amount + Number(amount);
+            state.costOfShares = Number(this.state.TSLA_daily.costOfShares) + Number(amount * price)
+            state.avgPrice = state.costOfShares / state.amount
+
+
                break
            default:
               amount = 0
@@ -75,6 +122,7 @@ class UserHome extends Component {
            const userId = this.props.user
                  order = { symbol, sector, buyPrice, amount, userId }
           } else {
+
            const sellPrice = price
            const userId = this.props.user
                  order = { symbol, sector, sellPrice, amount, userId }
@@ -82,11 +130,22 @@ class UserHome extends Component {
           this.props.postOrder(order)
 
 
-   }
+          let symbolName = symbol + "_daily"
+
+          this.setState({
+
+          [symbolName]: {
+           ...state }
+         })
+
+
+      }
 
    handleChange = (event) => {
-   console.log("event.target.value", event.target)
+
    this.setState({ [event.target.name]: event.target.value })
+
+
 
    }
 
@@ -111,6 +170,21 @@ class UserHome extends Component {
 //This is my array i can use to traverse
       var storeArray = [uaa, nke, gs, ms, xom, twtr, tsla]
 
+      console.log("this is UAA-daily state", this.state.UAA_daily)
+      console.log("this is NKE-daily state", this.state.NKE_daily)
+      console.log("this is GS-daily state", this.state.GS_daily)
+      console.log("this is UMSdaily state", this.state.MS_daily)
+      console.log("this is UAXOM_daily state", this.state.XOM_daily)
+      console.log("this is UTWTR_daily state", this.state.TWTR_daily)
+      console.log("this is UTSLAdaily state", this.state.TSLA_daily)
+
+      let stockAmount = [this.state.UAA_daily,
+      this.state.NKE_daily,
+      this.state.GS_daily,
+      this.state.MS_daily,
+      this.state.XOM_daily,
+      this.state.TWTR_daily,
+      this.state.TSLA_daily]
 
     return (
     <div className='row container'>
@@ -125,6 +199,8 @@ class UserHome extends Component {
                <th className='center-align'>Ask</th>
                <th className='center-align'>Ask Size</th>
                <th className='center-align'>Sell</th>
+               <th className='right-align'>Daily Position</th>
+               <th className='right-align'>Daily P/L</th>
                <th className='right-align'>Last Sale Price</th>
                <th className='center-align'>Volume</th>
 
@@ -138,11 +214,11 @@ class UserHome extends Component {
             <tr key={index}>
              <td id='sym'>{stock.symbol}</td>
 
-             <td id='trAmount'><input onChange={this.handleChange} name={stock.symbol} type="text" id='amount'/></td>
+             <td id='trAmount'><input onChange={this.handleChange}  name={stock.symbol} type="text" id='amount'/></td>
 
              <td className='center-align'>
                <button
-                 type='button' onClick={() => this.handleClick(stock.bidPrice, stock.symbol, "BUY")}
+                 type='button' onClick={() => this.handleClick(stock.askPrice, stock.symbol, "BUY")}
                  className="btn btn-small waves-effect waves-light"
                  name="buy-button">Buy</button></td>
 
@@ -153,11 +229,12 @@ class UserHome extends Component {
 
              <td className='center-align'>
                <button
-                 type='button' onClick={() => this.handleClick(stock.askPrice, stock.symbol, "SEll")}
+                 type='button' onClick={() => this.handleClick(stock.bidPrice, stock.symbol, "SEll")}
                  className="btn btn-small waves-effect waves-light"
                  name="sell-button">Sell</button></td>
-
-             <td className='right-align'>{stock.lastSalePrice}</td>
+             <td className='center-align'>{stockAmount[index].amount}</td>
+             <td className='center-align'>{Math.round((stockAmount[index].amount * stock.lastSalePrice) - (stockAmount[index].amount * stockAmount[index].avgPrice)) }</td>
+             <td className='center-align'>{stock.lastSalePrice}</td>
              <td className='center-align'>{stock.volume}</td>
 
            </tr>
@@ -195,5 +272,7 @@ const mapDispatchToProps = dispatch => ({
 
 
 })
+
+//<td className='center-align'>{`this.state.${stock.symbol + '_daily'}.amount`}</td>
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserHome)

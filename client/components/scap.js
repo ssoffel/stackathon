@@ -25,4 +25,5 @@ var ordersAggregator = []
  Object.keys(stocks).forEach(function(key, index){
     ordersAggregator.push({[key]: stocks[key]})
  })
-console.log("stocks", ordersAggregator)
+
+ 

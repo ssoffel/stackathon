@@ -65,12 +65,12 @@ class Portfolio extends Component {
             switch (key[0]) {
               case 'UAA':
                 stateObj = this.state.UAA
-                stateObj.sector = 'Consumer Durable Goods'
+                stateObj.sector = 'Consumer Durable Apparel'
                 console.log("in UAA", stateObj)
                 break
               case "NKE":
                  stateObj = this.state.NKE
-                 stateObj.sector = 'Consumer Durable Goods'
+                 stateObj.sector = 'Consumer Durable Apparel'
                  console.log("in NKE", stateObj)
                  break
               case "GS":
@@ -110,7 +110,8 @@ class Portfolio extends Component {
               <span className="title">Shares: {order[Object.keys(order)]}</span>
 
               <p>Sector: {stateObj.sector} <br/>
-                 Current Value: { Number(order[Object.keys(order)]) * Number(stateObj.bidPrice) } <br/>
+                 Current Value: { Math.abs(Number(order[Object.keys(order)]) * Number(stateObj.bidPrice)) } <br/>
+                 Daily Profit/Loss: { '$500' } <br/>
               </p>
               <a href="#!" className="secondary-content"><i className="material-icons">grade</i></a>
             </li>
