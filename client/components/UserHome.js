@@ -19,21 +19,18 @@ class UserHome extends Component {
        XOM: "",
        TWTR: "",
        TSLA: "",
-       UAA_daily: {amount: 0, costOfShares: 0, avgPrice: 0},
-       NKE_daily: {amount: 0, costOfShares: 0, avgPrice: 0},
-       GS_daily: {amount: 0, costOfShares: 0, avgPrice: 0},
-       MS_daily: {amount: 0, costOfShares: 0, avgPrice: 0},
-       XOM_daily: {amount: 0, costOfShares: 0, avgPrice: 0},
-       TWTR_daily: {amount: 0, costOfShares: 0, avgPrice: 0},
-       TSLA_daily: {amount: 0, costOfShares: 0, avgPrice: 0},
+       UAA_daily: {amount: 0, costOfShares: 0, avgPrice: 0, dailyClosedPL: 0 },
+       NKE_daily: {amount: 0, costOfShares: 0, avgPrice: 0, dailyClosedPL: 0 },
+       GS_daily: {amount: 0, costOfShares: 0, avgPrice: 0, dailyClosedPL: 0 },
+       MS_daily: {amount: 0, costOfShares: 0, avgPrice: 0, dailyClosedPL: 0 },
+       XOM_daily: {amount: 0, costOfShares: 0, avgPrice: 0, dailyClosedPL: 0 },
+       TWTR_daily: {amount: 0, costOfShares: 0, avgPrice: 0, dailyClosedPL: 0 },
+       TSLA_daily: {amount: 0, costOfShares: 0, avgPrice: 0, dailyClosedPL: 0 },
 
      }
    }
 
-
-
-
-    handleClick = (price, symbol, direction) =>{
+   handleClick = (price, symbol, direction) =>{
 
       window.confirm(`
         Symbol: ${symbol},
@@ -50,6 +47,10 @@ class UserHome extends Component {
               amount = direction === 'BUY' ? this.state.UAA : (this.state.UAA * -1)
               sector = 'Consumer Durable Apparel'
               state = {...this.state.UAA_daily};
+
+              // state.dailyClosedPL = state.amount == 0 ? state.dailyClosedPL :
+              // Number(this.state.UAA.amount * price) - Number(this.state.UAA.amount * state.avgPrice)
+
               state.amount = this.state.UAA_daily.amount + Number(amount);
               state.costOfShares = Number(this.state.UAA_daily.costOfShares) + Number(amount * price)
               state.avgPrice = state.costOfShares / state.amount
