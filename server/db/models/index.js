@@ -1,9 +1,9 @@
 const User = require('./user')
-const StockList = require('./StockList')
+const DailyPL = require('./DailyPL')
 const Portfolio = require('./Portfolio')
 
 
-console.log(StockList, "what is stockList")
+
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -25,6 +25,6 @@ console.log(StockList, "what is stockList")
  */
 module.exports = {
   User,
-  StockList,
+  DailyPL,
   Portfolio
 }

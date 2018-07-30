@@ -1,7 +1,9 @@
 import React, { Component} from 'react'
 import { connect } from 'react-redux'
-import getStockList from '../store/stockList'
+import { postDailyOrder, updateOrder } from '../store/dailyPL'
 import { postOrder } from '../store/orders'
+import { processOrder } from './ProcessOrder'
+import { getPositions } from './GetPositions'
 
 
 
@@ -30,6 +32,31 @@ class UserHome extends Component {
      }
    }
 
+   componentDidMount = () => {
+     "console.log"
+     this.setState({
+      UAA_daily: getPositions(this.props.daily, 'UAA'),
+      NKE_daily: getPositions(this.props.daily, 'NKE'),
+      GS_daily: getPositions(this.props.daily, 'GS'),
+      MS_daily: getPositions(this.props.daily, 'MS'),
+      XOM_daily: getPositions(this.props.daily, 'XOM'),
+      TWTR_daily: getPositions(this.props.daily, 'TWTR'),
+      TSLA_daily: getPositions(this.props.daily, 'TSLA'),
+     })
+   }
+
+   componentWillReceiveProps = (prevProps) => {
+     this.setState({
+      UAA_daily: getPositions(prevProps.daily, 'UAA'),
+      NKE_daily: getPositions(prevProps.daily, 'NKE'),
+      GS_daily: getPositions(prevProps.daily, 'GS'),
+      MS_daily: getPositions(prevProps.daily, 'MS'),
+      XOM_daily: getPositions(prevProps.daily, 'XOM'),
+      TWTR_daily: getPositions(prevProps.daily, 'TWTR'),
+      TSLA_daily: getPositions(prevProps.daily, 'TSLA'),
+     })
+   }
+
    handleClick = (price, symbol, direction) =>{
 
       window.confirm(`
@@ -38,108 +65,22 @@ class UserHome extends Component {
         price: ${price},
         status: filled,`
      );
-     var amount;
-     var order;
-     var sector;
-     var state;
-      switch (symbol) {
-            case 'UAA':
-              amount = direction === 'BUY' ? this.state.UAA : (this.state.UAA * -1)
-              sector = 'Consumer Durable Apparel'
-              state = {...this.state.UAA_daily};
 
+     let resp = processOrder(direction, symbol, price, this.state, this.props.daily, this.props.user)
 
-
-              state.amount = this.state.UAA_daily.amount + Number(amount);
-              state.costOfShares = Number(this.state.UAA_daily.costOfShares) + Number(amount * price)
-              state.avgPrice = state.costOfShares / state.amount
-
-              break
-            case "NKE":
-              amount = direction === 'BUY' ? this.state.NKE : (this.state.NKE * -1)
-              sector = 'Consumer Durable Apparel'
-              state = {...this.state.NKE_daily};
-              state.amount = this.state.NKE_daily.amount + Number(amount);
-              state.costOfShares = Number(this.state.NKE_daily.costOfShares) + Number(amount * price)
-              state.avgPrice = state.costOfShares / state.amount
-
-
-              break
-            case "GS":
-            amount = direction === 'BUY' ? this.state.GS : (this.state.GS * -1)
-            sector = "Banking"
-            state = {...this.state.GS_daily};
-            state.amount = this.state.GS_daily.amount + Number(amount);
-            state.costOfShares = Number(this.state.GS_daily.costOfShares) + Number(amount * price)
-            state.avgPrice = state.costOfShares / state.amount
-
-               break
-            case "MS":
-            amount = direction === 'BUY' ? this.state.MS : (this.state.MS * -1)
-            sector = "Banking"
-            state = {...this.state.MS_daily};
-            state.amount = this.state.MS_daily.amount + Number(amount);
-            state.costOfShares = Number(this.state.MS_daily.costOfShares) + Number(amount * price)
-            state.avgPrice = state.costOfShares / state.amount
-
-
-               break
-            case "XOM":
-            amount = direction === 'BUY' ? this.state.XOM : (this.state.XOM * -1)
-            sector = "Energy"
-            state = {...this.state.XOM_daily};
-            state.amount = this.state.XOM_daily.amount + Number(amount);
-            state.costOfShares = Number(this.state.XOM_daily.costOfShares) + Number(amount * price)
-            state.avgPrice = state.costOfShares / state.amount
-
-               break
-            case "TWTR":
-            amount = direction === 'BUY' ? this.state.TWTR : (this.state.TWTR * -1)
-            sector = 'Software Services'
-            state = {...this.state.TWTR_daily};
-            state.amount = this.state.TWTR_daily.amount + Number(amount);
-            state.costOfShares = Number(this.state.TWTR_daily.costOfShares) + Number(amount * price)
-            state.avgPrice = state.costOfShares / state.amount
-
-
-               break
-            case "TSLA":
-            amount = direction === 'BUY' ? this.state.TSLA : (this.state.TSLA * -1)
-            sector = 'Automotive'
-            state = {...this.state.TSLA_daily};
-            state.amount = this.state.TSLA_daily.amount + Number(amount);
-            state.costOfShares = Number(this.state.TSLA_daily.costOfShares) + Number(amount * price)
-            state.avgPrice = state.costOfShares / state.amount
-
-
-               break
-           default:
-              amount = 0
-          }
-
-          if (direction === "BUY") {
-           const buyPrice = price
-           const userId = this.props.user
-                 order = { symbol, sector, buyPrice, amount, userId }
-          } else {
-
-           const sellPrice = price
-           const userId = this.props.user
-                 order = { symbol, sector, sellPrice, amount, userId }
-          }
-          this.props.postOrder(order)
-
+          this.props.postOrder(resp[0])
+          this.props.postDailyOrder(resp[1])
+          //this.props.putDailyOrder(resp[1])
 
           let symbolName = symbol + "_daily"
 
+          console.log("this.props.daily before gtePositions call", this.props.daily)
+
           this.setState({
+            [symbolName]: getPositions(this.props.daily, symbol)
 
-          [symbolName]: {
-           ...state }
          })
-
-
-      }
+     }
 
    handleChange = (event) => {
 
@@ -150,13 +91,14 @@ class UserHome extends Component {
    }
 
     render(){
-      console.log("this.props", this.props)
+
 
       if(!this.props.stockUAA.symbol || !this.props.stockNKE.symbol || !this.props.stockGS || !this.props.stockMS || !this.props.stockXOM
          || !this.props.stockTWTR || !this.props.stockTSLA){
 
         return<div>Loading...</div>
       }
+     console.log("this is this.props.daily in render", this.props.daily)
 
       var uaa = this.props.stockUAA
       var nke = this.props.stockNKE
@@ -170,13 +112,7 @@ class UserHome extends Component {
 //This is my array i can use to traverse
       var storeArray = [uaa, nke, gs, ms, xom, twtr, tsla]
 
-      console.log("this is UAA-daily state", this.state.UAA_daily)
-      console.log("this is NKE-daily state", this.state.NKE_daily)
-      console.log("this is GS-daily state", this.state.GS_daily)
-      console.log("this is UMSdaily state", this.state.MS_daily)
-      console.log("this is UAXOM_daily state", this.state.XOM_daily)
-      console.log("this is UTWTR_daily state", this.state.TWTR_daily)
-      console.log("this is UTSLAdaily state", this.state.TSLA_daily)
+
 
       let stockAmount = [this.state.UAA_daily,
       this.state.NKE_daily,
@@ -224,7 +160,6 @@ class UserHome extends Component {
                  type='button' onClick={() => this.handleClick(stock.askPrice, stock.symbol, "BUY")}
                  className="btn btn-small waves-effect waves-light"
                  name="buy-button">Buy</button></td>
-
              <td className="center-align">{stock.bidSize}</td>
              <td id='bid-price' className='center-align'>{stock.bidPrice}</td>
              <td id='ask-price' className='center-align'>{stock.askPrice}</td>
@@ -239,8 +174,8 @@ class UserHome extends Component {
 
 
              <td className='center-align'>{ !isNaN(Math.round((stockAmount[index].amount * stock.lastSalePrice) - (stockAmount[index].amount * stockAmount[index].avgPrice))) ?
-             Math.round((stockAmount[index].amount * stock.lastSalePrice) - (stockAmount[index].amount * stockAmount[index].avgPrice)) :
-              ((stockAmount[index].costOfShares) * -1) }</td>
+             Math.round((stockAmount[index].amount * stock.lastSalePrice) - (stockAmount[index].amount * stockAmount[index].avgPrice )) :
+              Math.round((stockAmount[index].costOfShares) * -1) }</td>
              <td className='center-align'>{stock.lastSalePrice}</td>
              <td className='center-align'>{stock.volume}</td>
 
@@ -265,21 +200,20 @@ const mapStateToProps = state => {
    stockXOM: state.stock.XOM,
    stockTWTR: state.stock.TWTR,
    stockTSLA: state.stock.TSLA,
-   user: state.user.id
+   user: state.user.id,
+   daily: state.dailyPL.daily
 
   }
 }
 
 const mapDispatchToProps = dispatch => ({
 
-  getStockList: () => dispatch(getStockList()),
-  postOrder: (order) => dispatch(postOrder(order))
-
-
-
+  postOrder: (order) => dispatch(postOrder(order)),
+  postDailyOrder: (order) => dispatch(postDailyOrder(order)),
+  putDailyOrder: (order) => dispatch(updateOrder(order))
 
 })
 
-//<td className='center-align'>{`this.state.${stock.symbol + '_daily'}.amount`}</td>
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserHome)

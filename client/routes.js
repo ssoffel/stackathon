@@ -7,6 +7,7 @@ import UserHome from './components/UserHome'
 import Portfolio from './components/Portfolio'
 import Orders from './components/Orders'
 import {me} from './store'
+import { loadAllDailyOrders } from './store/dailyPL'
 
 /**
  * COMPONENT
@@ -15,6 +16,7 @@ import {me} from './store'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+    this.props.loadAllDailyOrders()
   }
 
   render() {
@@ -56,7 +58,8 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
-    }
+    },
+    loadAllDailyOrders: () => dispatch(loadAllDailyOrders())
   }
 }
 

@@ -42,22 +42,7 @@ async function seed() {
     { symbol: 'NKE', sector: 'Consumer Durables Apparel', buyPrice: 74.11, amount: 1000, userId: murphy.id }
   )
 
-  await StockList.create(
-   { symbol: 'NKE' }
-  )
 
-  await StockList.create(
-   { symbol: 'UAA' }
-  )
-  await StockList.create(
-   { symbol: 'XOM' }
-  )
-  await StockList.create(
-   { symbol: 'MS' }
-  )
-  await StockList.create(
-   { symbol: 'GS' }
-  )
 
 
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
