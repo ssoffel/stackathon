@@ -5,8 +5,12 @@ const { DailyPL } = require('../db/models')
 
 module.exports = router
 
-router.get('/', async (req, res, next) => {
-    const response = await DailyPL.findAll()
+router.get('/:id', async (req, res, next) => {
+    const response = await DailyPL.findAll({
+      where: {
+        userId: req.params.id
+      }
+    })
     res.json(response)
   }
 )

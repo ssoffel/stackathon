@@ -1,10 +1,6 @@
 export const processOrder = (direction, symbol, price, state, daily, userId) => {
 
-console.log("direction", direction)
-console.log("symbol", symbol)
-console.log("price", price)
-console.log("state", state)
-console.log("daily", daily)
+
 
 
 
@@ -86,8 +82,8 @@ switch (symbol) {
            order = { symbol, sector, sellPrice, amount, userId }
     }
 
-    let orderDaily = { symbol, amount, avgPrice: price, costOfShares}
-    console.log("this is orderDaily", orderDaily)
+    let orderDaily = { symbol, amount, avgPrice: price, costOfShares, userId}
+
 
     return [order, orderDaily, tempState]
 

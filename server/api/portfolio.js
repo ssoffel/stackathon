@@ -11,8 +11,18 @@ router.get('/', async (req, res, next) => {
   }
 )
 
+router.get('/:id', async (req, res, next) => {
+    const orders = await Portfolio.findAll({
+      where: {
+        userId: req.params.id
+      }
+    })
+    res.json(orders)
+  }
+)
+
 router.post('/', async (req, res, next) => {
-  console.log("Im in post route")
+
   const newOrder = await Portfolio.create(req.body)
   res.json(newOrder)
 })

@@ -9,6 +9,7 @@ const Portfolio = require('./Portfolio')
  * ex. if we had another model called BlogPost, we might say:
  */
  Portfolio.belongsTo(User)
+ DailyPL.belongsTo(User)
  User.hasOne(Portfolio)
 
 

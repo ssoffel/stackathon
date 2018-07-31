@@ -33,10 +33,10 @@ export const postDailyOrder = (order) => {
   }
 }
 
-export const loadAllDailyOrders = () => {
+export const loadAllDailyOrders = (userId) => {
   return async dispatch => {
     try{
-      const response = await axios.get(`/api/daily`)
+      const response = await axios.get(`/api/daily/${userId}`)
       const allOrders = response.data;
       dispatch(gotAllDailyOrders(allOrders))
     } catch (error) { console(error) }

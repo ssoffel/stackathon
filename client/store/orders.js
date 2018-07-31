@@ -26,20 +26,20 @@ export const aggregateOrders = orders => ({
 })
 
 
-export const getAllOrders = () => {
+export const getAllOrders = (userId) => {
   return async dispatch => {
     try {
-      const response = await axios.get(`/api/portfolio`)
+      const response = await axios.get(`/api/portfolio/${userId}`)
       const orders = response.data
       dispatch(gotAllOrders(orders))
     } catch (error) { console(error) }
   }
 }
 
-export const getAllAggregatedOrders = () => {
+export const getAllAggregatedOrders = (userId) => {
   return async dispatch => {
     try {
-      const response = await axios.get(`/api/portfolio`)
+      const response = await axios.get(`/api/portfolio/${userId}`)
       const orders = response.data
       dispatch(aggregateOrders(orders))
     } catch (error) { console(error) }

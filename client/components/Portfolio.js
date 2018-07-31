@@ -22,7 +22,7 @@ class Portfolio extends Component {
 
 
   componentDidMount() {
-    this.props.getAllAggregatedOrders()
+    this.props.getAllAggregatedOrders(this.props.user)
     this.setState({
       UAA: this.props.stockUAA,
       NKE: this.props.stockNKE,
@@ -47,10 +47,7 @@ class Portfolio extends Component {
 
       return<div>Loading...</div>
     }
-
-    console.log("this.is UAA state", this.state.UAA)
-    console.log("this.is NKE state", this.state.NKE)
-    console.log("this.is GS state", this.state.GS)
+    console.log("This.props", this.props)
 
 
 
@@ -111,8 +108,8 @@ class Portfolio extends Component {
 
               <p>Sector: {stateObj.sector} <br/>
                  Current Value: { Math.abs(Number(order[Object.keys(order)]) * Number(stateObj.bidPrice)) } <br/>
-                 Daily P&L: { '$500' } <br/>
-                 Net P&L: { '$25,000' } <br/>
+
+                 
               </p>
 
             </li>
@@ -125,6 +122,7 @@ class Portfolio extends Component {
 }
 const mapStateToProps = state => ({
   aggregateOrders: state.orders.aggregateOrders,
+  user: state.user.id,
   stockUAA: state.stock.UAA,
   stockNKE: state.stock.NKE,
   stockGS: state.stock.GS,
@@ -135,7 +133,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-   getAllAggregatedOrders: () => dispatch(getAllAggregatedOrders())
+   getAllAggregatedOrders: (userId) => dispatch(getAllAggregatedOrders(userId))
 })
 
 

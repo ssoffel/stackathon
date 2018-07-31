@@ -8,7 +8,8 @@ class Orders extends Component {
 
 
   componentDidMount() {
-   this.props.getAllOrders()
+   this.props.getAllOrders(this.props.user)
+
   }
 
 
@@ -18,6 +19,7 @@ class Orders extends Component {
    if(!this.props.orders){
      return<div>Loading...</div>
    }
+
 
     return (
       <div>
@@ -59,11 +61,12 @@ class Orders extends Component {
 
 
 const mapStateToProps = state => ({
-  orders: state.orders.allOrders
+  orders: state.orders.allOrders,
+  user: state.user.id
 })
 
 const mapDispatchToProps = dispatch => ({
-  getAllOrders: () => dispatch(getAllOrders())
+  getAllOrders: (userId) => dispatch(getAllOrders(userId))
 })
 
 

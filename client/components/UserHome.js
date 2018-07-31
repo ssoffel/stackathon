@@ -33,7 +33,7 @@ class UserHome extends Component {
    }
 
    componentDidMount = () => {
-     "console.log"
+
      this.setState({
       UAA_daily: getPositions(this.props.daily, 'UAA'),
       NKE_daily: getPositions(this.props.daily, 'NKE'),
@@ -74,7 +74,7 @@ class UserHome extends Component {
 
           let symbolName = symbol + "_daily"
 
-          console.log("this.props.daily before gtePositions call", this.props.daily)
+
 
           this.setState({
             [symbolName]: getPositions(this.props.daily, symbol)
@@ -98,7 +98,7 @@ class UserHome extends Component {
 
         return<div>Loading...</div>
       }
-     console.log("this is this.props.daily in render", this.props.daily)
+
 
       var uaa = this.props.stockUAA
       var nke = this.props.stockNKE
@@ -122,7 +122,7 @@ class UserHome extends Component {
       this.state.TWTR_daily,
       this.state.TSLA_daily]
 
-
+    console.log("this props daily", this.props.daily)
 
     return (
     <div className='row container'>
